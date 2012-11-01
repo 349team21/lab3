@@ -1,0 +1,23 @@
+/home/wwestlin/Desktop/lab3-support/tasks/libc/stdio/printf.o:  \
+ /home/wwestlin/Desktop/lab3-support/tasks/libc/stdio/printf.c \
+  /home/wwestlin/Desktop/lab3-support/tasks/libc/include/stdio.h \
+  /home/wwestlin/Desktop/lab3-support/tasks/libc/include/stdarg.h \
+  /home/wwestlin/Desktop/lab3-support/tasks/libc/include/sys/types.h \
+  /home/wwestlin/Desktop/lab3-support/tasks/libc/include/bits/types.h \
+  /home/wwestlin/Desktop/lab3-support/tasks/libc/include/unistd.h \
+  /home/wwestlin/Desktop/lab3-support/tasks/libc/include/bits/fileno.h \
+  /home/wwestlin/Desktop/lab3-support/tasks/libc/stdio/doprnt.h
+
+/home/wwestlin/Desktop/lab3-support/tasks/libc/include/stdio.h:
+
+/home/wwestlin/Desktop/lab3-support/tasks/libc/include/stdarg.h:
+
+/home/wwestlin/Desktop/lab3-support/tasks/libc/include/sys/types.h:
+
+/home/wwestlin/Desktop/lab3-support/tasks/libc/include/bits/types.h:
+
+/home/wwestlin/Desktop/lab3-support/tasks/libc/include/unistd.h:
+
+/home/wwestlin/Desktop/lab3-support/tasks/libc/include/bits/fileno.h:
+
+/home/wwestlin/Desktop/lab3-support/tasks/libc/stdio/doprnt.h:

@@ -1,0 +1,11 @@
+/home/wwestlin/Desktop/lab3-support/tasks/libc/string/strspn.o:  \
+ /home/wwestlin/Desktop/lab3-support/tasks/libc/string/strspn.c \
+  /home/wwestlin/Desktop/lab3-support/tasks/libc/include/string.h \
+  /home/wwestlin/Desktop/lab3-support/tasks/libc/include/sys/types.h \
+  /home/wwestlin/Desktop/lab3-support/tasks/libc/include/bits/types.h
+
+/home/wwestlin/Desktop/lab3-support/tasks/libc/include/string.h:
+
+/home/wwestlin/Desktop/lab3-support/tasks/libc/include/sys/types.h:
+
+/home/wwestlin/Desktop/lab3-support/tasks/libc/include/bits/types.h:

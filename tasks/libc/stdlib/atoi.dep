@@ -1,0 +1,11 @@
+/home/wwestlin/Desktop/lab3-support/tasks/libc/stdlib/atoi.o:  \
+ /home/wwestlin/Desktop/lab3-support/tasks/libc/stdlib/atoi.c \
+  /home/wwestlin/Desktop/lab3-support/tasks/libc/include/stdlib.h \
+  /home/wwestlin/Desktop/lab3-support/tasks/libc/include/ctype.h \
+  /home/wwestlin/Desktop/lab3-support/tasks/libc/include/inline.h
+
+/home/wwestlin/Desktop/lab3-support/tasks/libc/include/stdlib.h:
+
+/home/wwestlin/Desktop/lab3-support/tasks/libc/include/ctype.h:
+
+/home/wwestlin/Desktop/lab3-support/tasks/libc/include/inline.h:

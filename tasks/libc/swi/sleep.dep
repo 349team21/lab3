@@ -1,0 +1,8 @@
+/home/wwestlin/Desktop/lab3-support/tasks/libc/swi/sleep.o:  \
+ /home/wwestlin/Desktop/lab3-support/tasks/libc/swi/sleep.S \
+  /home/wwestlin/Desktop/lab3-support/tasks/libc/include/asm.h \
+  /home/wwestlin/Desktop/lab3-support/tasks/libc/include/bits/swi.h
+
+/home/wwestlin/Desktop/lab3-support/tasks/libc/include/asm.h:
+
+/home/wwestlin/Desktop/lab3-support/tasks/libc/include/bits/swi.h:

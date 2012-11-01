@@ -1,0 +1,14 @@
+/home/wwestlin/Desktop/lab3-support/uboot/stubs.o:  \
+ /home/wwestlin/Desktop/lab3-support/uboot/stubs.c \
+  /home/wwestlin/Desktop/lab3-support/uboot/include/exports.h \
+  /home/wwestlin/Desktop/lab3-support/kernel/include/types.h \
+  /home/wwestlin/Desktop/lab3-support/kernel/include/stdarg.h \
+  /home/wwestlin/Desktop/lab3-support/uboot/include/_exports.h
+
+/home/wwestlin/Desktop/lab3-support/uboot/include/exports.h:
+
+/home/wwestlin/Desktop/lab3-support/kernel/include/types.h:
+
+/home/wwestlin/Desktop/lab3-support/kernel/include/stdarg.h:
+
+/home/wwestlin/Desktop/lab3-support/uboot/include/_exports.h:

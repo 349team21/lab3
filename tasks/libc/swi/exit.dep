@@ -1,0 +1,5 @@
+/home/wwestlin/Desktop/lab3-support/tasks/libc/swi/exit.o:  \
+ /home/wwestlin/Desktop/lab3-support/tasks/libc/swi/exit.S \
+  /home/wwestlin/Desktop/lab3-support/tasks/libc/include/bits/swi.h
+
+/home/wwestlin/Desktop/lab3-support/tasks/libc/include/bits/swi.h:

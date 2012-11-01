@@ -1,0 +1,20 @@
+/home/wwestlin/Desktop/lab3-support/tasks/libc/stdlib/strtoul.o:  \
+ /home/wwestlin/Desktop/lab3-support/tasks/libc/stdlib/strtoul.c \
+  /home/wwestlin/Desktop/lab3-support/tasks/libc/include/stdlib.h \
+  /home/wwestlin/Desktop/lab3-support/tasks/libc/include/ctype.h \
+  /home/wwestlin/Desktop/lab3-support/tasks/libc/include/inline.h \
+  /home/wwestlin/Desktop/lab3-support/tasks/libc/include/string.h \
+  /home/wwestlin/Desktop/lab3-support/tasks/libc/include/sys/types.h \
+  /home/wwestlin/Desktop/lab3-support/tasks/libc/include/bits/types.h
+
+/home/wwestlin/Desktop/lab3-support/tasks/libc/include/stdlib.h:
+
+/home/wwestlin/Desktop/lab3-support/tasks/libc/include/ctype.h:
+
+/home/wwestlin/Desktop/lab3-support/tasks/libc/include/inline.h:
+
+/home/wwestlin/Desktop/lab3-support/tasks/libc/include/string.h:
+
+/home/wwestlin/Desktop/lab3-support/tasks/libc/include/sys/types.h:
+
+/home/wwestlin/Desktop/lab3-support/tasks/libc/include/bits/types.h:

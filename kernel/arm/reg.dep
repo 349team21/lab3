@@ -1,0 +1,11 @@
+/home/wwestlin/Desktop/lab3-support/kernel/arm/reg.o:  \
+ /home/wwestlin/Desktop/lab3-support/kernel/arm/reg.c \
+  /home/wwestlin/Desktop/lab3-support/kernel/include/types.h \
+  /home/wwestlin/Desktop/lab3-support/kernel/include/arm/reg.h \
+  /home/wwestlin/Desktop/lab3-support/kernel/include/inline.h
+
+/home/wwestlin/Desktop/lab3-support/kernel/include/types.h:
+
+/home/wwestlin/Desktop/lab3-support/kernel/include/arm/reg.h:
+
+/home/wwestlin/Desktop/lab3-support/kernel/include/inline.h:

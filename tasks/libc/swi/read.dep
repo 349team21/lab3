@@ -1,0 +1,5 @@
+/home/wwestlin/Desktop/lab3-support/tasks/libc/swi/read.o:  \
+ /home/wwestlin/Desktop/lab3-support/tasks/libc/swi/read.S \
+  /home/wwestlin/Desktop/lab3-support/tasks/libc/include/bits/swi.h
+
+/home/wwestlin/Desktop/lab3-support/tasks/libc/include/bits/swi.h:

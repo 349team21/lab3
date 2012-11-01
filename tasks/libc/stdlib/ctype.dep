@@ -1,0 +1,8 @@
+/home/wwestlin/Desktop/lab3-support/tasks/libc/stdlib/ctype.o:  \
+ /home/wwestlin/Desktop/lab3-support/tasks/libc/stdlib/ctype.c \
+  /home/wwestlin/Desktop/lab3-support/tasks/libc/include/ctype.h \
+  /home/wwestlin/Desktop/lab3-support/tasks/libc/include/inline.h
+
+/home/wwestlin/Desktop/lab3-support/tasks/libc/include/ctype.h:
+
+/home/wwestlin/Desktop/lab3-support/tasks/libc/include/inline.h:
