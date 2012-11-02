@@ -22,6 +22,7 @@ unsigned int* uboot_irq;
 unsigned int* uboot_irq_addr;
 unsigned int svc_link_register;
 unsigned int svc_stack_register;
+volatile size_t systemTime;
 
 //Function Definitions
 extern void toUSER(int argc, char *argv[]);
@@ -30,6 +31,8 @@ extern void handleIRQ(void);
 void exit(int status);
 ssize_t read(int fd, void* buf, size_t count);
 ssize_t write(int fd, const void* buf, size_t count);
+size_t time(void);
+void sleep(size_t time);
 
 int kmain(int argc, char** argv, uint32_t table)
 {
@@ -50,7 +53,7 @@ int kmain(int argc, char** argv, uint32_t table)
 
 	//Oscillator setup
 	reg_write(OSTMR_OIER_ADDR, OSTMR_OIER_E0);
-	reg_write(OSTMR_OSMR_ADDR(0), OSTMR_FREQ);	
+	reg_write(OSTMR_OSMR_ADDR(0), 36864);	
 
 	svc_link_register = slr;
 	svc_stack_register = ssr;
@@ -104,6 +107,7 @@ int kmain(int argc, char** argv, uint32_t table)
 
 	printf("MAKING USER SWITCH\n");
 
+	systemTime = 0;
 	reg_write(OSTMR_OSCR_ADDR, 0x0);
 
 	toUSER(argc, argv);
@@ -130,10 +134,9 @@ void exit(int status)
 
 }
 
-void temp_int(void){
+void interrupt(void){
 
-	printf("INTERRUPT :)\n");
-
+	systemTime += 10;
 	reg_write(OSTMR_OSCR_ADDR, 0x0);
 	reg_write(OSTMR_OSSR_ADDR, 0x1);
 
@@ -165,11 +168,35 @@ int my_swi_dispatcher(int swi_number, int* args_ptr)
 			// write takes three parameters: int fd, void* buf, size_t count
 			result = (int) write((int)args_ptr[0], (void *)args_ptr[1], (size_t)args_ptr[2]);
 			break;
+
+		case TIME_SWI:
+			result = (int) time();
+			break;
+
+		case SLEEP_SWI:
+			sleep(((size_t) args_ptr[0]));
+			break;
 		
 		default:
 			exit(0x0badc0de);
 	}
 	return result;
+}
+
+size_t time(void){
+	return systemTime;
+}
+
+void sleep(size_t time){
+	printf("CURRENT TIME:%lu\n",systemTime);
+/*	size_t curTime;
+	size_t startTime;
+	startTime = time();
+	curTime = time();
+	while((curTime - startTime) < time)
+		curTime = time();
+*/
+	return;
 }
 
 

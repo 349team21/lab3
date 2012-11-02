@@ -1,11 +1,11 @@
-/home/wwestlin/Desktop/lab3/tasks/libc/string/strcspn.o:  \
- /home/wwestlin/Desktop/lab3/tasks/libc/string/strcspn.c \
-  /home/wwestlin/Desktop/lab3/tasks/libc/include/string.h \
-  /home/wwestlin/Desktop/lab3/tasks/libc/include/sys/types.h \
-  /home/wwestlin/Desktop/lab3/tasks/libc/include/bits/types.h
+/home/wwestlin/Desktop/lab3/source/tasks/libc/string/strcspn.o:  \
+ /home/wwestlin/Desktop/lab3/source/tasks/libc/string/strcspn.c \
+  /home/wwestlin/Desktop/lab3/source/tasks/libc/include/string.h \
+  /home/wwestlin/Desktop/lab3/source/tasks/libc/include/sys/types.h \
+  /home/wwestlin/Desktop/lab3/source/tasks/libc/include/bits/types.h
 
-/home/wwestlin/Desktop/lab3/tasks/libc/include/string.h:
+/home/wwestlin/Desktop/lab3/source/tasks/libc/include/string.h:
 
-/home/wwestlin/Desktop/lab3/tasks/libc/include/sys/types.h:
+/home/wwestlin/Desktop/lab3/source/tasks/libc/include/sys/types.h:
 
-/home/wwestlin/Desktop/lab3/tasks/libc/include/bits/types.h:
+/home/wwestlin/Desktop/lab3/source/tasks/libc/include/bits/types.h:

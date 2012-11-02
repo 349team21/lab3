@@ -1,8 +1,8 @@
-/home/wwestlin/Desktop/lab3/tasks/libc/crt0.o:  \
- /home/wwestlin/Desktop/lab3/tasks/libc/crt0.S \
-  /home/wwestlin/Desktop/lab3/tasks/libc/include/asm.h \
-  /home/wwestlin/Desktop/lab3/tasks/libc/include/bits/swi.h
+/home/wwestlin/Desktop/lab3/source/tasks/libc/crt0.o:  \
+ /home/wwestlin/Desktop/lab3/source/tasks/libc/crt0.S \
+  /home/wwestlin/Desktop/lab3/source/tasks/libc/include/asm.h \
+  /home/wwestlin/Desktop/lab3/source/tasks/libc/include/bits/swi.h
 
-/home/wwestlin/Desktop/lab3/tasks/libc/include/asm.h:
+/home/wwestlin/Desktop/lab3/source/tasks/libc/include/asm.h:
 
-/home/wwestlin/Desktop/lab3/tasks/libc/include/bits/swi.h:
+/home/wwestlin/Desktop/lab3/source/tasks/libc/include/bits/swi.h:

@@ -1,11 +1,11 @@
-/home/wwestlin/Desktop/lab3/kernel/arm/reg.o:  \
- /home/wwestlin/Desktop/lab3/kernel/arm/reg.c \
-  /home/wwestlin/Desktop/lab3/kernel/include/types.h \
-  /home/wwestlin/Desktop/lab3/kernel/include/arm/reg.h \
-  /home/wwestlin/Desktop/lab3/kernel/include/inline.h
+/home/wwestlin/Desktop/lab3/source/kernel/arm/reg.o:  \
+ /home/wwestlin/Desktop/lab3/source/kernel/arm/reg.c \
+  /home/wwestlin/Desktop/lab3/source/kernel/include/types.h \
+  /home/wwestlin/Desktop/lab3/source/kernel/include/arm/reg.h \
+  /home/wwestlin/Desktop/lab3/source/kernel/include/inline.h
 
-/home/wwestlin/Desktop/lab3/kernel/include/types.h:
+/home/wwestlin/Desktop/lab3/source/kernel/include/types.h:
 
-/home/wwestlin/Desktop/lab3/kernel/include/arm/reg.h:
+/home/wwestlin/Desktop/lab3/source/kernel/include/arm/reg.h:
 
-/home/wwestlin/Desktop/lab3/kernel/include/inline.h:
+/home/wwestlin/Desktop/lab3/source/kernel/include/inline.h:

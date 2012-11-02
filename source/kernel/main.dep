@@ -1,41 +1,41 @@
-/home/wwestlin/Desktop/lab3/kernel/main.o:  \
- /home/wwestlin/Desktop/lab3/kernel/main.c \
-  /home/wwestlin/Desktop/lab3/uboot/include/exports.h \
-  /home/wwestlin/Desktop/lab3/kernel/include/types.h \
-  /home/wwestlin/Desktop/lab3/kernel/include/stdarg.h \
-  /home/wwestlin/Desktop/lab3/uboot/include/_exports.h \
-  /home/wwestlin/Desktop/lab3/kernel/include/arm/psr.h \
-  /home/wwestlin/Desktop/lab3/kernel/include/inline.h \
-  /home/wwestlin/Desktop/lab3/kernel/include/arm/exception.h \
-  /home/wwestlin/Desktop/lab3/kernel/include/arm/interrupt.h \
-  /home/wwestlin/Desktop/lab3/kernel/include/arm/timer.h \
-  /home/wwestlin/Desktop/lab3/kernel/include/bits/swi.h \
-  /home/wwestlin/Desktop/lab3/kernel/include/bits/errno.h \
-  /home/wwestlin/Desktop/lab3/kernel/include/bits/fileno.h \
-  /home/wwestlin/Desktop/lab3/kernel/include/arm/reg.h
+/home/wwestlin/Desktop/lab3/source/kernel/main.o:  \
+ /home/wwestlin/Desktop/lab3/source/kernel/main.c \
+  /home/wwestlin/Desktop/lab3/source/uboot/include/exports.h \
+  /home/wwestlin/Desktop/lab3/source/kernel/include/types.h \
+  /home/wwestlin/Desktop/lab3/source/kernel/include/stdarg.h \
+  /home/wwestlin/Desktop/lab3/source/uboot/include/_exports.h \
+  /home/wwestlin/Desktop/lab3/source/kernel/include/arm/psr.h \
+  /home/wwestlin/Desktop/lab3/source/kernel/include/inline.h \
+  /home/wwestlin/Desktop/lab3/source/kernel/include/arm/exception.h \
+  /home/wwestlin/Desktop/lab3/source/kernel/include/arm/interrupt.h \
+  /home/wwestlin/Desktop/lab3/source/kernel/include/arm/timer.h \
+  /home/wwestlin/Desktop/lab3/source/kernel/include/bits/swi.h \
+  /home/wwestlin/Desktop/lab3/source/kernel/include/bits/errno.h \
+  /home/wwestlin/Desktop/lab3/source/kernel/include/bits/fileno.h \
+  /home/wwestlin/Desktop/lab3/source/kernel/include/arm/reg.h
 
-/home/wwestlin/Desktop/lab3/uboot/include/exports.h:
+/home/wwestlin/Desktop/lab3/source/uboot/include/exports.h:
 
-/home/wwestlin/Desktop/lab3/kernel/include/types.h:
+/home/wwestlin/Desktop/lab3/source/kernel/include/types.h:
 
-/home/wwestlin/Desktop/lab3/kernel/include/stdarg.h:
+/home/wwestlin/Desktop/lab3/source/kernel/include/stdarg.h:
 
-/home/wwestlin/Desktop/lab3/uboot/include/_exports.h:
+/home/wwestlin/Desktop/lab3/source/uboot/include/_exports.h:
 
-/home/wwestlin/Desktop/lab3/kernel/include/arm/psr.h:
+/home/wwestlin/Desktop/lab3/source/kernel/include/arm/psr.h:
 
-/home/wwestlin/Desktop/lab3/kernel/include/inline.h:
+/home/wwestlin/Desktop/lab3/source/kernel/include/inline.h:
 
-/home/wwestlin/Desktop/lab3/kernel/include/arm/exception.h:
+/home/wwestlin/Desktop/lab3/source/kernel/include/arm/exception.h:
 
-/home/wwestlin/Desktop/lab3/kernel/include/arm/interrupt.h:
+/home/wwestlin/Desktop/lab3/source/kernel/include/arm/interrupt.h:
 
-/home/wwestlin/Desktop/lab3/kernel/include/arm/timer.h:
+/home/wwestlin/Desktop/lab3/source/kernel/include/arm/timer.h:
 
-/home/wwestlin/Desktop/lab3/kernel/include/bits/swi.h:
+/home/wwestlin/Desktop/lab3/source/kernel/include/bits/swi.h:
 
-/home/wwestlin/Desktop/lab3/kernel/include/bits/errno.h:
+/home/wwestlin/Desktop/lab3/source/kernel/include/bits/errno.h:
 
-/home/wwestlin/Desktop/lab3/kernel/include/bits/fileno.h:
+/home/wwestlin/Desktop/lab3/source/kernel/include/bits/fileno.h:
 
-/home/wwestlin/Desktop/lab3/kernel/include/arm/reg.h:
+/home/wwestlin/Desktop/lab3/source/kernel/include/arm/reg.h:

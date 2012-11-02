@@ -1,11 +1,11 @@
-/home/wwestlin/Desktop/lab3/kernel/arm/psr.o:  \
- /home/wwestlin/Desktop/lab3/kernel/arm/psr.c \
-  /home/wwestlin/Desktop/lab3/kernel/include/types.h \
-  /home/wwestlin/Desktop/lab3/kernel/include/arm/psr.h \
-  /home/wwestlin/Desktop/lab3/kernel/include/inline.h
+/home/wwestlin/Desktop/lab3/source/kernel/arm/psr.o:  \
+ /home/wwestlin/Desktop/lab3/source/kernel/arm/psr.c \
+  /home/wwestlin/Desktop/lab3/source/kernel/include/types.h \
+  /home/wwestlin/Desktop/lab3/source/kernel/include/arm/psr.h \
+  /home/wwestlin/Desktop/lab3/source/kernel/include/inline.h
 
-/home/wwestlin/Desktop/lab3/kernel/include/types.h:
+/home/wwestlin/Desktop/lab3/source/kernel/include/types.h:
 
-/home/wwestlin/Desktop/lab3/kernel/include/arm/psr.h:
+/home/wwestlin/Desktop/lab3/source/kernel/include/arm/psr.h:
 
-/home/wwestlin/Desktop/lab3/kernel/include/inline.h:
+/home/wwestlin/Desktop/lab3/source/kernel/include/inline.h:

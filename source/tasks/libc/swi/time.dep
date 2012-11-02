@@ -1,8 +1,8 @@
-/home/wwestlin/Desktop/lab3/tasks/libc/swi/time.o:  \
- /home/wwestlin/Desktop/lab3/tasks/libc/swi/time.S \
-  /home/wwestlin/Desktop/lab3/tasks/libc/include/asm.h \
-  /home/wwestlin/Desktop/lab3/tasks/libc/include/bits/swi.h
+/home/wwestlin/Desktop/lab3/source/tasks/libc/swi/time.o:  \
+ /home/wwestlin/Desktop/lab3/source/tasks/libc/swi/time.S \
+  /home/wwestlin/Desktop/lab3/source/tasks/libc/include/asm.h \
+  /home/wwestlin/Desktop/lab3/source/tasks/libc/include/bits/swi.h
 
-/home/wwestlin/Desktop/lab3/tasks/libc/include/asm.h:
+/home/wwestlin/Desktop/lab3/source/tasks/libc/include/asm.h:
 
-/home/wwestlin/Desktop/lab3/tasks/libc/include/bits/swi.h:
+/home/wwestlin/Desktop/lab3/source/tasks/libc/include/bits/swi.h:

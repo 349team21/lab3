@@ -1,14 +1,14 @@
-/home/wwestlin/Desktop/lab3/tasks/hello/hello.o:  \
- /home/wwestlin/Desktop/lab3/tasks/hello/hello.c \
-  /home/wwestlin/Desktop/lab3/tasks/libc/include/unistd.h \
-  /home/wwestlin/Desktop/lab3/tasks/libc/include/bits/fileno.h \
-  /home/wwestlin/Desktop/lab3/tasks/libc/include/sys/types.h \
-  /home/wwestlin/Desktop/lab3/tasks/libc/include/bits/types.h
+/home/wwestlin/Desktop/lab3/source/tasks/hello/hello.o:  \
+ /home/wwestlin/Desktop/lab3/source/tasks/hello/hello.c \
+  /home/wwestlin/Desktop/lab3/source/tasks/libc/include/unistd.h \
+  /home/wwestlin/Desktop/lab3/source/tasks/libc/include/bits/fileno.h \
+  /home/wwestlin/Desktop/lab3/source/tasks/libc/include/sys/types.h \
+  /home/wwestlin/Desktop/lab3/source/tasks/libc/include/bits/types.h
 
-/home/wwestlin/Desktop/lab3/tasks/libc/include/unistd.h:
+/home/wwestlin/Desktop/lab3/source/tasks/libc/include/unistd.h:
 
-/home/wwestlin/Desktop/lab3/tasks/libc/include/bits/fileno.h:
+/home/wwestlin/Desktop/lab3/source/tasks/libc/include/bits/fileno.h:
 
-/home/wwestlin/Desktop/lab3/tasks/libc/include/sys/types.h:
+/home/wwestlin/Desktop/lab3/source/tasks/libc/include/sys/types.h:
 
-/home/wwestlin/Desktop/lab3/tasks/libc/include/bits/types.h:
+/home/wwestlin/Desktop/lab3/source/tasks/libc/include/bits/types.h:

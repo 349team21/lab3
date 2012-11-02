@@ -57,7 +57,7 @@ handleSWI:
 handleIRQ:
 	sub 	sp, sp, #4 
 	stmfd 	sp!, {r0-r12, lr}
-	bl temp_int
+	bl interrupt
 	ldmfd 	sp!, {r0-r12, lr} 
 	add 	sp, sp, #4 
 	movs pc, lr

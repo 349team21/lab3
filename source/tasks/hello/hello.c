@@ -13,6 +13,7 @@ int main(int argc, char** argv)
 {
 	int x = 43;
 	int i;
+	size_t sTime = 100;
 	char hello[] = "Hello World\r\n";
 	while(1){
 	for(i = 0; i<300000000; i++){
@@ -23,6 +24,7 @@ int main(int argc, char** argv)
 	hello[0] = 'a';
 	}
 	write(STDOUT_FILENO, hello, sizeof(hello) - 1); 
+	sleep(sTime);
 	}
 	return 0;
 }
