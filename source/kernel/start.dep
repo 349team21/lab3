@@ -1,0 +1,5 @@
+/home/wwestlin/Desktop/lab3/kernel/start.o:  \
+ /home/wwestlin/Desktop/lab3/kernel/start.S \
+  /home/wwestlin/Desktop/lab3/kernel/include/asm.h
+
+/home/wwestlin/Desktop/lab3/kernel/include/asm.h:

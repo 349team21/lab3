@@ -1,0 +1,5 @@
+/home/wwestlin/Desktop/lab3/tasks/libc/swi/write.o:  \
+ /home/wwestlin/Desktop/lab3/tasks/libc/swi/write.S \
+  /home/wwestlin/Desktop/lab3/tasks/libc/include/bits/swi.h
+
+/home/wwestlin/Desktop/lab3/tasks/libc/include/bits/swi.h:
