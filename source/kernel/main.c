@@ -23,6 +23,11 @@ unsigned int* uboot_irq_addr;
 unsigned int svc_link_register;
 unsigned int svc_stack_register;
 volatile size_t systemTime;
+volatile unsigned int old_icmr;
+volatile unsigned int old_iclr;
+volatile unsigned int old_oier;
+volatile unsigned int old_osmr;
+
 
 //Function Definitions
 extern void toUSER(int argc, char *argv[]);
@@ -33,12 +38,14 @@ ssize_t read(int fd, void* buf, size_t count);
 ssize_t write(int fd, const void* buf, size_t count);
 size_t time(void);
 void sleep(size_t time);
+void setup_timer(void);
+void setup_irq(void);
+void restore_uboot(void);
 
 int kmain(int argc, char** argv, uint32_t table)
 {
 	unsigned int swi_vector_contents = *((int*)0x08);
 	unsigned int ldr_opcode = 0xe59FF000;
-
 	unsigned int irq_vector_contents = *((int*)0x18);
 
 	unsigned int slr = svc_link_register;
@@ -48,16 +55,16 @@ int kmain(int argc, char** argv, uint32_t table)
 	global_data = table;
 
 	//Interrupt setup
-	reg_write(INT_ICMR_ADDR, (0x1 << 26));
-	reg_write(INT_ICLR_ADDR, (0x0<< 26));
+	setup_irq();
 
 	//Oscillator setup
-	reg_write(OSTMR_OIER_ADDR, OSTMR_OIER_E0);
-	reg_write(OSTMR_OSMR_ADDR(0), 36864);	
+	setup_timer();	
 
+	// save the lr and sp for exiting the kernel
 	svc_link_register = slr;
 	svc_stack_register = ssr;
 
+  // install swi handler
   if ((swi_vector_contents & 0xFFFFF000) ^ ldr_opcode)
     {
       printf("Instruction was not recognized.\n");
@@ -69,6 +76,7 @@ int kmain(int argc, char** argv, uint32_t table)
       uboot_swi = (unsigned int*) (0x10 + offset);
     }
 
+  // install irq handler
   if ((irq_vector_contents & 0xFFFFF000) ^ ldr_opcode)
     {
       printf("(IRQ) Instruction was not recognized.\n");
@@ -80,14 +88,12 @@ int kmain(int argc, char** argv, uint32_t table)
       uboot_irq = (unsigned int*) (0x20 + offset);
     }
 
-	
 	uboot_swi_addr = (unsigned int *)(*uboot_swi);
-
 	uboot_irq_addr = (unsigned int *)(*uboot_irq);
 
+  // new instructions
   unsigned int new_instruction1 = 0xe51FF004;
   unsigned int new_instruction2 = (unsigned int) &handleSWI;
-
   unsigned int new_instruction3 = (unsigned int) &handleIRQ;
 
   /* Modify uboot_swi_addr to transfer control, store asm to restore later */
@@ -97,23 +103,63 @@ int kmain(int argc, char** argv, uint32_t table)
   old_swi_contents_3 = *uboot_irq_addr;
   old_swi_contents_4 = *(uboot_irq_addr + 1);
 
-
-
   *uboot_swi_addr = new_instruction1;
   *(uboot_swi_addr + 1) = new_instruction2;
 
   *uboot_irq_addr = new_instruction1;
   *(uboot_irq_addr + 1) = new_instruction3;
 
-	printf("MAKING USER SWITCH\n");
-
 	systemTime = 0;
 	reg_write(OSTMR_OSCR_ADDR, 0x0);
 
+	printf("MAKING USER SWITCH\n");
 	toUSER(argc, argv);
 
+	// restore uboot
+	restore_uboot();
+	
 	return 0;
 }
+
+
+// interrupt setup
+void setup_irq(void) {
+	old_icmr = reg_read(INT_ICMR_ADDR);
+	old_iclr = reg_read(INT_ICLR_ADDR);
+	reg_write(INT_ICMR_ADDR, (0x1 << INT_OSTMR_0));
+	reg_write(INT_ICLR_ADDR, (0x0 << INT_OSTMR_0));
+}
+
+
+// timer setup
+void setup_timer(void) {
+	old_oier = reg_read(OSTMR_OIER_ADDR);
+	old_osmr = reg_read(OSTMR_OSMR_ADDR(0));
+	reg_clear(OSTMR_OIER_ADDR, OSTMR_OIER_E1 | OSTMR_OIER_E2 | OSTMR_OIER_E3);
+	reg_write(OSTMR_OIER_ADDR, OSTMR_OIER_E0);
+	reg_write(OSTMR_OSMR_ADDR(0), OSTMR_FREQ/100); // match to 10ms
+
+}
+
+
+// restore uboot
+void restore_uboot(void) {
+	/* Restore the SWI handler */
+	*uboot_swi_addr = old_swi_contents_1;
+    *(uboot_swi_addr + 1) = old_swi_contents_2;
+	
+	/* Restore the IRQ handler */
+	*uboot_irq_addr = old_swi_contents_3;
+    *(uboot_irq_addr + 1) = old_swi_contents_4;
+	
+	/* Restore ICMR, ICLR, and OIER */
+	reg_write(INT_ICMR_ADDR, old_icmr);
+	reg_write(INT_ICLR_ADDR, old_iclr);
+	reg_write(OSTMR_OIER_ADDR, old_oier);
+	reg_write(OSTMR_OSMR_ADDR(0), old_osmr);
+}
+
+
 
 /* Exit the kernel */
 void exit(int status)
@@ -135,11 +181,9 @@ void exit(int status)
 }
 
 void interrupt(void){
-
 	systemTime += 10;
 	reg_write(OSTMR_OSCR_ADDR, 0x0);
 	reg_write(OSTMR_OSSR_ADDR, 0x1);
-
 }
 
 /*
@@ -187,15 +231,20 @@ size_t time(void){
 	return systemTime;
 }
 
-void sleep(size_t time){
-	printf("CURRENT TIME:%lu\n",systemTime);
-/*	size_t curTime;
+void sleep(size_t duration){
+	// Enable IRQ
+//	asm("mrs r12, cpsr");
+//	asm("bic r12, r12, #0x80");
+//	asm("msr cpsr, r12");
+	
+	printf("CURRENT TIME:%lu\n", systemTime);
+	size_t curTime;
 	size_t startTime;
 	startTime = time();
 	curTime = time();
-	while((curTime - startTime) < time)
+	while((curTime - startTime) < duration) {
 		curTime = time();
-*/
+	}
 	return;
 }
 
