@@ -237,7 +237,7 @@ void sleep(size_t duration){
 //	asm("bic r12, r12, #0x80");
 //	asm("msr cpsr, r12");
 	
-	printf("CURRENT TIME:%lu\n", systemTime);
+/*	printf("CURRENT TIME:%lu\n", systemTime);
 	size_t curTime;
 	size_t startTime;
 	startTime = time();
@@ -245,6 +245,11 @@ void sleep(size_t duration){
 	while((curTime - startTime) < duration) {
 		curTime = time();
 	}
+	return;
+*/
+	volatile size_t curTime = time();
+	size_t endTime = curTime + duration;
+	while (curTime < endTime);
 	return;
 }
 
