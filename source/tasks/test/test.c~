@@ -22,8 +22,12 @@ const char begin5[] = "begin testing5 ... \r\n";
 const char done[] = "done!\r\n";
 
 int main(int argc, char** argv){
+<<<<<<< HEAD
+	printf("Starting test program...\n");
+=======
 	
 	write(STDOUT_FILENO, begin1, sizeof(begin1) - 1); 
+>>>>>>> e598c53d2436f16ab178c64782ab9525dd256d5b
 	test1();
 	
 	/*

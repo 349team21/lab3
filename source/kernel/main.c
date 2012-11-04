@@ -243,8 +243,6 @@ void sleep(size_t duration){
 	const size_t endTime = systemTime + duration;
 	while(systemTime < endTime);
 	printf("FINISHED: %lu\n",time());
-
-	return;
 }
 
 

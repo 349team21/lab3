@@ -236,6 +236,7 @@ size_t time(void){
 void sleep(size_t duration){
 	// Enable IRQ
 	asm("mrs r12, cpsr");
+
 	asm("bic r12, r12, #0x80");
 	asm("msr cpsr, r12");
 
@@ -243,8 +244,6 @@ void sleep(size_t duration){
 	const size_t endTime = systemTime + duration;
 	while(systemTime < endTime);
 	printf("FINISHED: %lu\n",time());
-
-	return;
 }
 
 
