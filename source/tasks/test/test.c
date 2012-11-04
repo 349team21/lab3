@@ -13,6 +13,7 @@ void test4(void);
 void test5(void);
 
 int main(int argc, char** argv){
+	printf("Starting test program...\n");
 	test1();
 	test2();
 	test3();

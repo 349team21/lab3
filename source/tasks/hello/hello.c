@@ -13,7 +13,7 @@ int main(int argc, char** argv)
 {
 	int x = 43;
 	int i;
-	size_t sTime = 100;
+	size_t sTime = 535;
 	char hello[] = "Hello World\r\n";
 	while(1){
 	for(i = 0; i<300000000; i++){

@@ -109,8 +109,6 @@ int kmain(int argc, char** argv, uint32_t table)
   *uboot_irq_addr = new_instruction1;
   *(uboot_irq_addr + 1) = new_instruction3;
 
-	systemTime = 0;
-	reg_write(OSTMR_OSCR_ADDR, 0x0);
 
 	printf("MAKING USER SWITCH\n");
 	toUSER(argc, argv);
@@ -135,9 +133,12 @@ void setup_irq(void) {
 void setup_timer(void) {
 	old_oier = reg_read(OSTMR_OIER_ADDR);
 	old_osmr = reg_read(OSTMR_OSMR_ADDR(0));
+
+	systemTime = 0;
+	reg_write(OSTMR_OSCR_ADDR, 0x0);
 	reg_clear(OSTMR_OIER_ADDR, OSTMR_OIER_E1 | OSTMR_OIER_E2 | OSTMR_OIER_E3);
 	reg_write(OSTMR_OIER_ADDR, OSTMR_OIER_E0);
-	reg_write(OSTMR_OSMR_ADDR(0), OSTMR_FREQ/100); // match to 10ms
+	reg_write(OSTMR_OSMR_ADDR(0), OSTMR_FREQ/100); 
 
 }
 
@@ -181,8 +182,9 @@ void exit(int status)
 }
 
 void interrupt(void){
+	size_t curTime = reg_read(OSTMR_OSMR_ADDR(0));
 	systemTime += 10;
-	reg_write(OSTMR_OSCR_ADDR, 0x0);
+	reg_write(OSTMR_OSMR_ADDR(0), curTime + (OSTMR_FREQ/100)); 
 	reg_write(OSTMR_OSSR_ADDR, 0x1);
 }
 
@@ -233,18 +235,15 @@ size_t time(void){
 
 void sleep(size_t duration){
 	// Enable IRQ
-//	asm("mrs r12, cpsr");
-//	asm("bic r12, r12, #0x80");
-//	asm("msr cpsr, r12");
-	
-	printf("CURRENT TIME:%lu\n", systemTime);
-	size_t curTime;
-	size_t startTime;
-	startTime = time();
-	curTime = time();
-	while((curTime - startTime) < duration) {
-		curTime = time();
-	}
+	asm("mrs r12, cpsr");
+	asm("bic r12, r12, #0x80");
+	asm("msr cpsr, r12");
+
+	printf("START TIME: %lu\n",time());
+	const size_t endTime = systemTime + duration;
+	while(systemTime < endTime);
+	printf("FINISHED: %lu\n",time());
+
 	return;
 }
 
