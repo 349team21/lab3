@@ -12,36 +12,23 @@ void test3(void);
 void test4(void);
 void test5(void);
 
-const char pass[] = "pass!\r\n";
-const char fail[] = "fail... \r\n";
-const char begin1[] = "begin testing1 ... \r\n";
-const char begin2[] = "begin testing2 ... \r\n";
-const char begin3[] = "begin testing3 ... \r\n";
-const char begin4[] = "begin testing4 ... \r\n";
-const char begin5[] = "begin testing5 ... \r\n";
-const char done[] = "done!\r\n";
-
 int main(int argc, char** argv){
-	
-	write(STDOUT_FILENO, begin1, sizeof(begin1) - 1); 
 	test1();
-	
-	/*
-	write(STDOUT_FILENO, begin2, sizeof(begin2) - 1);
 	test2();
-	*/
-	
-	write(STDOUT_FILENO, begin3, sizeof(begin3) - 1);
 	test3();
-	
-	write(STDOUT_FILENO, begin4, sizeof(begin4) - 1);
 	test4();
-	
-	write(STDOUT_FILENO, begin5, sizeof(begin5) - 1);
 	test5();
-	
-	write(STDOUT_FILENO, done, sizeof(done) - 1);
 	return 0;
+}
+
+// print out time in seconds and milliseconds
+ 
+void printTime(size_t duration){
+	size_t ms, seconds;
+	ms = duration % 1000;
+	seconds = (duration - ms) / 1000;
+	printf("time is %ld.%3ld\n", seconds, ms);
+	return;
 }
 
 
@@ -54,15 +41,16 @@ void test1(void) {
 	size_t  cur_time;
 	prev_time = time();
 	int i;
-	for(i = 0; i < 1000; i++){
+	for(i = 0; i <1000; i++){
 		cur_time = time();
+		printf("Testing at i : %d \n", i);
 		if (prev_time > cur_time) {
-			write(STDOUT_FILENO, fail, sizeof(fail) - 1); 
+			printf("Error in test1 at i = %d \n",i);
 			return;
 		}
 		prev_time = cur_time;
 	}
-	write(STDOUT_FILENO, pass, sizeof(pass) - 1); 
+	printf("test1 passed \n");
 }
 
 
@@ -86,16 +74,13 @@ void test2(void) {
 		duration = time() - prev_time;
 		
 		if (duration < 10){
-			write(STDOUT_FILENO, fail, sizeof(fail) - 1);
+			printf("Error in test2 \n");
 			return;
 		}
-		
-		if (duration > 12){
-			write(STDOUT_FILENO, fail, sizeof(fail) - 1);
-			return;
-		}
+		printf("Time should be 10 ms\n");
+		printf("Measured time:");
+		printTime(duration);
 	}
-	write(STDOUT_FILENO, pass, sizeof(pass) - 1);
 }
 
 
@@ -110,17 +95,14 @@ void test3(void) {
 		duration = time() - prev_time;
 
 		if (duration < 10){
-			write(STDOUT_FILENO, fail, sizeof(fail) - 1);
-		//	printTime(duration);
+			printf("Error in test3 at i : %d \n", i);
+			printf("Measured duration time:");
+			printTime(duration);
 			return;
 		}
-		if (duration >= 20){
-			write(STDOUT_FILENO, fail, sizeof(fail) - 1);
-		//	printTime(duration);
-			return;
-		}
+		printTime(duration);
 	}
-	write(STDOUT_FILENO, pass, sizeof(pass) - 1);
+	printf("test3 passed \n");
 }
 
 
@@ -130,7 +112,7 @@ void test3(void) {
  	to show it is constantly increasing also
 */
 void test4(void) {
-	size_t  prev_duration = 0;
+	size_t  prev_time = 0;
 	size_t  duration = 0;
 	size_t  temp;
 	int i;
@@ -139,14 +121,18 @@ void test4(void) {
 		sleep(i);
 		duration = time() - temp;
 
-		if (duration < prev_duration){
-			write(STDOUT_FILENO, fail, sizeof(fail) - 1);
-			printf("i=%d, duration=%lu, prev=%lu\n",i, duration, prev_duration);
+		if(duration < prev_time){
+			printf("Error in test4 \n");
+			printf("Measured prev time:");
+			printTime(prev_time);
+			printf("Measured duration time:");
+			printTime(duration);
 			return;
 		}
-		prev_duration = duration;
+		prev_time = duration;
+		printTime(duration);
 	}	
-	write(STDOUT_FILENO, pass, sizeof(pass) - 1);
+	printf("test4 passed \n");
 }
 
 
@@ -162,11 +148,9 @@ void test5 (void) {
 		sleep(0);
 		duration = time() - prev_time;
 		
-		if (duration > 10) {
-			write(STDOUT_FILENO, fail, sizeof(fail) - 1);
-			return;
-		}
+		printf("Time should be close to 0 ms\n");
+		printf("Measured duration:");
+		printTime(duration);
 	}
-	write(STDOUT_FILENO, pass, sizeof(pass) - 1);
 	return;
 }
