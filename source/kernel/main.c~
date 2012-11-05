@@ -27,6 +27,9 @@ volatile unsigned int old_icmr;
 volatile unsigned int old_iclr;
 volatile unsigned int old_oier;
 volatile unsigned int old_osmr;
+unsigned int swi_vector_contents = *((int*)0x08);
+unsigned int ldr_opcode = 0xe59FF000;
+unsigned int irq_vector_contents = *((int*)0x18);
 
 
 //Function Definitions
@@ -44,9 +47,6 @@ void restore_uboot(void);
 
 int kmain(int argc, char** argv, uint32_t table)
 {
-	unsigned int swi_vector_contents = *((int*)0x08);
-	unsigned int ldr_opcode = 0xe59FF000;
-	unsigned int irq_vector_contents = *((int*)0x18);
 
 	unsigned int slr = svc_link_register;
 	unsigned int ssr = svc_stack_register;
@@ -64,17 +64,7 @@ int kmain(int argc, char** argv, uint32_t table)
 	svc_link_register = slr;
 	svc_stack_register = ssr;
 
-  // install swi handler
-  if ((swi_vector_contents & 0xFFFFF000) ^ ldr_opcode)
-    {
-      printf("Instruction was not recognized.\n");
-      exit(0x0badc0de);
-    }
-  else
-    {
-      int offset = swi_vector_contents ^ ldr_opcode;
-      uboot_swi = (unsigned int*) (0x10 + offset);
-    }
+
 
   // install irq handler
   if ((irq_vector_contents & 0xFFFFF000) ^ ldr_opcode)
@@ -117,6 +107,19 @@ int kmain(int argc, char** argv, uint32_t table)
 	restore_uboot();
 	
 	return 0;
+}
+
+void install_swi_handler(void){
+  if ((swi_vector_contents & 0xFFFFF000) ^ ldr_opcode)
+    {
+      printf("Instruction was not recognized.\n");
+      exit(0x0badc0de);
+    }
+  else
+    {
+      int offset = swi_vector_contents ^ ldr_opcode;
+      uboot_swi = (unsigned int*) (0x10 + offset);
+    }
 }
 
 
@@ -236,14 +239,11 @@ size_t time(void){
 void sleep(size_t duration){
 	// Enable IRQ
 	asm("mrs r12, cpsr");
-
 	asm("bic r12, r12, #0x80");
 	asm("msr cpsr, r12");
 
-	printf("START TIME: %lu\n",time());
 	const size_t endTime = systemTime + duration;
 	while(systemTime < endTime);
-	printf("FINISHED: %lu\n",time());
 }
 
 

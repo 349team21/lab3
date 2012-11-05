@@ -111,12 +111,12 @@ void test3(void) {
 
 		if (duration < 10){
 			write(STDOUT_FILENO, fail, sizeof(fail) - 1);
-			printTime(duration);
+		//	printTime(duration);
 			return;
 		}
-		if (duration > 12){
+		if (duration >= 20){
 			write(STDOUT_FILENO, fail, sizeof(fail) - 1);
-			printTime(duration);
+		//	printTime(duration);
 			return;
 		}
 	}
@@ -141,7 +141,7 @@ void test4(void) {
 
 		if (duration < prev_duration){
 			write(STDOUT_FILENO, fail, sizeof(fail) - 1);
-			printTime(duration);
+			printf("i=%d, duration=%lu, prev=%lu\n",i, duration, prev_duration);
 			return;
 		}
 		prev_duration = duration;
@@ -162,7 +162,7 @@ void test5 (void) {
 		sleep(0);
 		duration = time() - prev_time;
 		
-		if (duration > 2) {
+		if (duration > 10) {
 			write(STDOUT_FILENO, fail, sizeof(fail) - 1);
 			return;
 		}

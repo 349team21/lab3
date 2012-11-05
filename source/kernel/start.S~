@@ -41,6 +41,8 @@ handleSWI:
 	@taken from lecture slides
 	sub 	sp, sp, #4 
 	stmfd 	sp!, {r0-r12, lr}
+	ldr 	r2, =global_data
+	ldr 	r8, [r2]
 	mrs 	r2, spsr
 	str 	r2, [sp, #14*4]
 	mov 	r1, sp 
@@ -49,7 +51,7 @@ handleSWI:
 	bl	my_swi_dispatcher
 	ldr 	r2, [sp, #14*4]
 	msr 	spsr, r2
-	add	sp, sp, #4
+	add		sp, sp, #4
 	ldmfd 	sp!, {r1-r12, lr} 
 	add 	sp, sp, #4 
 	movs 	pc, lr
@@ -57,7 +59,7 @@ handleSWI:
 handleIRQ:
 	sub 	sp, sp, #4 
 	stmfd 	sp!, {r0-r12, lr}
-	bl temp_int
+	bl interrupt
 	ldmfd 	sp!, {r0-r12, lr} 
 	add 	sp, sp, #4 
 	movs pc, lr

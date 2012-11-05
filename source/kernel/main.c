@@ -239,10 +239,8 @@ void sleep(size_t duration){
 	asm("bic r12, r12, #0x80");
 	asm("msr cpsr, r12");
 
-	printf("START TIME: %lu\n",time());
 	const size_t endTime = systemTime + duration;
 	while(systemTime < endTime);
-	printf("FINISHED: %lu\n",time());
 }
 
 

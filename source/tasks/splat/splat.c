@@ -11,21 +11,16 @@
 int main(int argc, char** argv)
 {
 	/* Add code here -- put your names at the top. */
-	const char cursor[4] = "|/-\\";
+	const char* cursor[4] = {"\b \b|","\b \b/","\b \b-","\b \b\\"};
 
 	int counter = 0;
-	printf("start! \n");
-	printf(" ");
+	write(1, " ", 1);
 	while(1)
 	{
-		printf("\b\b%c\r", cursor[counter % 4]);
+		write(1, cursor[counter % 4], 4);
 		counter ++;
-		int i = 0;
-		int sum = 0;
-		while (i < 100000) {
-			sum = sum + i;
-			i += sum;
-		}
+		sleep(200);
 	}	
 	return 0;
 }
+

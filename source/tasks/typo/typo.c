@@ -5,7 +5,7 @@
  * Links to libc.
  */
 #include <stdio.h>
-#include <stdlib.h>
+//#include <stdlib.h>
 #include <unistd.h>
 
 int main(int argc, char** argv)
@@ -14,6 +14,8 @@ int main(int argc, char** argv)
 	unsigned int MAXLINE = 100;
 	char buffer[MAXLINE];
 	size_t start_time, duration;
+	//const char* timeString = "Time taken: ";
+	//char temp[10];
 
 	while(1)
 	{
@@ -24,7 +26,18 @@ int main(int argc, char** argv)
 		int ms, seconds;
 		seconds = duration / 1000;
 		ms = duration % 1000;
-		printf("Time taken: %d.%d \n", seconds, ms);
+	/*	write(1, timeString, 12);
+		snprintf(temp, 10, "%d", seconds);
+		int i = 0;
+		while(temp[i] != '\0')
+		write(1, &temp[i++], 1);
+		write(1, ".",1);
+		snprintf(temp, 10, "%d", ms);
+		i = 0;
+		while(temp[i] != '\0')
+		write(1, &temp[i++], 1);
+		write(1, "\n", 1);*/
+		printf("Time taken: %i.%i \n", seconds, ms);
 	}
 	return 0;
 }

@@ -22,12 +22,8 @@ const char begin5[] = "begin testing5 ... \r\n";
 const char done[] = "done!\r\n";
 
 int main(int argc, char** argv){
-<<<<<<< HEAD
-	printf("Starting test program...\n");
-=======
 	
 	write(STDOUT_FILENO, begin1, sizeof(begin1) - 1); 
->>>>>>> e598c53d2436f16ab178c64782ab9525dd256d5b
 	test1();
 	
 	/*
@@ -115,12 +111,12 @@ void test3(void) {
 
 		if (duration < 10){
 			write(STDOUT_FILENO, fail, sizeof(fail) - 1);
-			printTime(duration);
+		//	printTime(duration);
 			return;
 		}
-		if (duration > 12){
+		if (duration >= 20){
 			write(STDOUT_FILENO, fail, sizeof(fail) - 1);
-			printTime(duration);
+		//	printTime(duration);
 			return;
 		}
 	}
@@ -145,7 +141,7 @@ void test4(void) {
 
 		if (duration < prev_duration){
 			write(STDOUT_FILENO, fail, sizeof(fail) - 1);
-			printTime(duration);
+			
 			return;
 		}
 		prev_duration = duration;
@@ -166,7 +162,7 @@ void test5 (void) {
 		sleep(0);
 		duration = time() - prev_time;
 		
-		if (duration > 2) {
+		if (duration > 10) {
 			write(STDOUT_FILENO, fail, sizeof(fail) - 1);
 			return;
 		}
