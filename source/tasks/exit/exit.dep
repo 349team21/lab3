@@ -1,5 +1,5 @@
-/home/wwestlin/Desktop/lab3/source/tasks/exit/exit.o:  \
- /home/wwestlin/Desktop/lab3/source/tasks/exit/exit.S \
-  /home/wwestlin/Desktop/lab3/source/tasks/libc/include/bits/swi.h
+/afs/ece/usr/yiang/Private/349/source/tasks/exit/exit.o:  \
+ /afs/ece/usr/yiang/Private/349/source/tasks/exit/exit.S \
+  /afs/ece/usr/yiang/Private/349/source/tasks/libc/include/bits/swi.h
 
-/home/wwestlin/Desktop/lab3/source/tasks/libc/include/bits/swi.h:
+/afs/ece/usr/yiang/Private/349/source/tasks/libc/include/bits/swi.h:

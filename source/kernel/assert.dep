@@ -1,26 +1,26 @@
-/home/wwestlin/Desktop/lab3/source/kernel/assert.o:  \
- /home/wwestlin/Desktop/lab3/source/kernel/assert.c \
-  /home/wwestlin/Desktop/lab3/source/kernel/include/assert.h \
-  /home/wwestlin/Desktop/lab3/source/kernel/include/stdarg.h \
-  /home/wwestlin/Desktop/lab3/source/uboot/include/exports.h \
-  /home/wwestlin/Desktop/lab3/source/kernel/include/types.h \
-  /home/wwestlin/Desktop/lab3/source/uboot/include/_exports.h \
-  /home/wwestlin/Desktop/lab3/source/kernel/include/arm/psr.h \
-  /home/wwestlin/Desktop/lab3/source/kernel/include/inline.h \
-  /home/wwestlin/Desktop/lab3/source/kernel/include/arm/exception.h
+/afs/ece/usr/yiang/Private/349/source/kernel/assert.o:  \
+ /afs/ece/usr/yiang/Private/349/source/kernel/assert.c \
+  /afs/ece/usr/yiang/Private/349/source/kernel/include/assert.h \
+  /afs/ece/usr/yiang/Private/349/source/kernel/include/stdarg.h \
+  /afs/ece/usr/yiang/Private/349/source/uboot/include/exports.h \
+  /afs/ece/usr/yiang/Private/349/source/kernel/include/types.h \
+  /afs/ece/usr/yiang/Private/349/source/uboot/include/_exports.h \
+  /afs/ece/usr/yiang/Private/349/source/kernel/include/arm/psr.h \
+  /afs/ece/usr/yiang/Private/349/source/kernel/include/inline.h \
+  /afs/ece/usr/yiang/Private/349/source/kernel/include/arm/exception.h
 
-/home/wwestlin/Desktop/lab3/source/kernel/include/assert.h:
+/afs/ece/usr/yiang/Private/349/source/kernel/include/assert.h:
 
-/home/wwestlin/Desktop/lab3/source/kernel/include/stdarg.h:
+/afs/ece/usr/yiang/Private/349/source/kernel/include/stdarg.h:
 
-/home/wwestlin/Desktop/lab3/source/uboot/include/exports.h:
+/afs/ece/usr/yiang/Private/349/source/uboot/include/exports.h:
 
-/home/wwestlin/Desktop/lab3/source/kernel/include/types.h:
+/afs/ece/usr/yiang/Private/349/source/kernel/include/types.h:
 
-/home/wwestlin/Desktop/lab3/source/uboot/include/_exports.h:
+/afs/ece/usr/yiang/Private/349/source/uboot/include/_exports.h:
 
-/home/wwestlin/Desktop/lab3/source/kernel/include/arm/psr.h:
+/afs/ece/usr/yiang/Private/349/source/kernel/include/arm/psr.h:
 
-/home/wwestlin/Desktop/lab3/source/kernel/include/inline.h:
+/afs/ece/usr/yiang/Private/349/source/kernel/include/inline.h:
 
-/home/wwestlin/Desktop/lab3/source/kernel/include/arm/exception.h:
+/afs/ece/usr/yiang/Private/349/source/kernel/include/arm/exception.h:

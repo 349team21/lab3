@@ -1,11 +1,11 @@
-/home/wwestlin/Desktop/lab3/source/tasks/libc/string/memcmp.o:  \
- /home/wwestlin/Desktop/lab3/source/tasks/libc/string/memcmp.c \
-  /home/wwestlin/Desktop/lab3/source/tasks/libc/include/string.h \
-  /home/wwestlin/Desktop/lab3/source/tasks/libc/include/sys/types.h \
-  /home/wwestlin/Desktop/lab3/source/tasks/libc/include/bits/types.h
+/afs/ece/usr/yiang/Private/349/source/tasks/libc/string/memcmp.o:  \
+ /afs/ece/usr/yiang/Private/349/source/tasks/libc/string/memcmp.c \
+  /afs/ece/usr/yiang/Private/349/source/tasks/libc/include/string.h \
+  /afs/ece/usr/yiang/Private/349/source/tasks/libc/include/sys/types.h \
+  /afs/ece/usr/yiang/Private/349/source/tasks/libc/include/bits/types.h
 
-/home/wwestlin/Desktop/lab3/source/tasks/libc/include/string.h:
+/afs/ece/usr/yiang/Private/349/source/tasks/libc/include/string.h:
 
-/home/wwestlin/Desktop/lab3/source/tasks/libc/include/sys/types.h:
+/afs/ece/usr/yiang/Private/349/source/tasks/libc/include/sys/types.h:
 
-/home/wwestlin/Desktop/lab3/source/tasks/libc/include/bits/types.h:
+/afs/ece/usr/yiang/Private/349/source/tasks/libc/include/bits/types.h:

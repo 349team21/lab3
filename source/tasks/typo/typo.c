@@ -15,10 +15,8 @@ int main(int argc, char** argv)
 	char buffer[MAXLINE];
 	volatile size_t start_time;
 	volatile size_t duration;
-	size_t ms;
-	size_t seconds;
-	//const char* timeString = "Time taken: ";
-	//char temp[10];
+	int ms;
+	int seconds;
 
 	while(1)
 	{
@@ -26,23 +24,9 @@ int main(int argc, char** argv)
 		int n = read(STDIN_FILENO, buffer, MAXLINE - 1);
 		duration = time() - start_time;
 		write(STDOUT_FILENO, buffer, n);
-		seconds = duration / 1000;
 		ms = duration % 1000;
-	/*	write(1, timeString, 12);
-		snprintf(temp, 10, "%d", seconds);
-		int i = 0;
-		while(temp[i] != '\0')
-		write(1, &temp[i++], 1);
-		write(1, ".",1);
-		snprintf(temp, 10, "%d", ms);
-		i = 0;
-		while(temp[i] != '\0')
-		write(1, &temp[i++], 1);
-		write(1, "\n", 1); */
-		printf("Time taken: %lu.%lu (%lu)\n", seconds, ms, duration);
-	//	printf("Time taken: %d", seconds);
-		//printf(".");
-		//printf("%d\n",ms);
+		seconds = (duration - ms) / 1000;
+		printf("Time taken: %d.%d (%lu)\n", seconds, ms, duration);
 	}
 	return 0;
 }

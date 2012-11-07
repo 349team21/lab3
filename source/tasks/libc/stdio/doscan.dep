@@ -1,20 +1,20 @@
-/home/wwestlin/Desktop/lab3/source/tasks/libc/stdio/doscan.o:  \
- /home/wwestlin/Desktop/lab3/source/tasks/libc/stdio/doscan.c \
-  /home/wwestlin/Desktop/lab3/source/tasks/libc/include/stdarg.h \
-  /home/wwestlin/Desktop/lab3/source/tasks/libc/include/sys/types.h \
-  /home/wwestlin/Desktop/lab3/source/tasks/libc/include/bits/types.h \
-  /home/wwestlin/Desktop/lab3/source/tasks/libc/include/ctype.h \
-  /home/wwestlin/Desktop/lab3/source/tasks/libc/include/inline.h \
-  /home/wwestlin/Desktop/lab3/source/tasks/libc/stdio/doscan.h
+/afs/ece/usr/yiang/Private/349/source/tasks/libc/stdio/doscan.o:  \
+ /afs/ece/usr/yiang/Private/349/source/tasks/libc/stdio/doscan.c \
+  /afs/ece/usr/yiang/Private/349/source/tasks/libc/include/stdarg.h \
+  /afs/ece/usr/yiang/Private/349/source/tasks/libc/include/sys/types.h \
+  /afs/ece/usr/yiang/Private/349/source/tasks/libc/include/bits/types.h \
+  /afs/ece/usr/yiang/Private/349/source/tasks/libc/include/ctype.h \
+  /afs/ece/usr/yiang/Private/349/source/tasks/libc/include/inline.h \
+  /afs/ece/usr/yiang/Private/349/source/tasks/libc/stdio/doscan.h
 
-/home/wwestlin/Desktop/lab3/source/tasks/libc/include/stdarg.h:
+/afs/ece/usr/yiang/Private/349/source/tasks/libc/include/stdarg.h:
 
-/home/wwestlin/Desktop/lab3/source/tasks/libc/include/sys/types.h:
+/afs/ece/usr/yiang/Private/349/source/tasks/libc/include/sys/types.h:
 
-/home/wwestlin/Desktop/lab3/source/tasks/libc/include/bits/types.h:
+/afs/ece/usr/yiang/Private/349/source/tasks/libc/include/bits/types.h:
 
-/home/wwestlin/Desktop/lab3/source/tasks/libc/include/ctype.h:
+/afs/ece/usr/yiang/Private/349/source/tasks/libc/include/ctype.h:
 
-/home/wwestlin/Desktop/lab3/source/tasks/libc/include/inline.h:
+/afs/ece/usr/yiang/Private/349/source/tasks/libc/include/inline.h:
 
-/home/wwestlin/Desktop/lab3/source/tasks/libc/stdio/doscan.h:
+/afs/ece/usr/yiang/Private/349/source/tasks/libc/stdio/doscan.h:

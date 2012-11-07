@@ -9,20 +9,27 @@
 #include <bits/fileno.h>
 #include <arm/reg.h>
 
+#define SWI_VECTOR_ADDR 0x00000008
+#define IRQ_VECTOR_ADDR 0x00000018
+#define PC_OFFSET       8
+
+#define LDR_PC_BASE  0xe51ff000 /* ldr pc, [pc, #imm12] */
+#define LDR_U_FLAG   0x00800000
+#define LDR_IMM_MASK 0x00000fff
+#define LDR_PC_NEXT  0xe51ff004 /* ldr pc, [pc, #-4] */
+
 
 //Global Variables
 uint32_t global_data;
-unsigned int old_swi_contents_1;
-unsigned int old_swi_contents_2;
-unsigned int old_swi_contents_3;
-unsigned int old_swi_contents_4;
-unsigned int* uboot_swi_addr;
-unsigned int* uboot_swi;
-unsigned int* uboot_irq;
-unsigned int* uboot_irq_addr;
-unsigned int svc_link_register;
-unsigned int svc_stack_register;
-volatile size_t systemTime;
+unsigned long old_swi_inst0;
+unsigned long old_swi_inst1;
+unsigned long old_irq_inst0;
+unsigned long old_irq_inst1;
+unsigned long* old_swi_handler;
+unsigned long* old_irq_handler;
+//volatile size_t systemTime;
+volatile size_t current_time;
+volatile size_t start_time;
 volatile unsigned int old_icmr;
 volatile unsigned int old_iclr;
 volatile unsigned int old_oier;
@@ -30,10 +37,13 @@ volatile unsigned int old_osmr;
 
 
 //Function Definitions
-extern void toUSER(int argc, char *argv[]);
+void install_swi_handler(void);
+void install_irq_handler(void);
+unsigned long* getAddr(unsigned int vector_addr);
+extern int toUSER(int argc, char *argv[]);
 extern void handleSWI(void);
 extern void handleIRQ(void);
-void exit(int status);
+extern void exit_kernel(int status);
 ssize_t read(int fd, void* buf, size_t count);
 ssize_t write(int fd, const void* buf, size_t count);
 size_t time(void);
@@ -44,80 +54,60 @@ void restore_uboot(void);
 
 int kmain(int argc, char** argv, uint32_t table)
 {
-	unsigned int swi_vector_contents = *((int*)0x08);
-	unsigned int ldr_opcode = 0xe59FF000;
-	unsigned int irq_vector_contents = *((int*)0x18);
-
-	unsigned int slr = svc_link_register;
-	unsigned int ssr = svc_stack_register;
-
 	app_startup(); /* bss is valid after this point */
 	global_data = table;
 
+	install_swi_handler();
+	install_irq_handler();
+	
 	//Interrupt setup
 	setup_irq();
 
 	//Oscillator setup
 	setup_timer();	
 
-	// save the lr and sp for exiting the kernel
-	svc_link_register = slr;
-	svc_stack_register = ssr;
-
-  // install swi handler
-  if ((swi_vector_contents & 0xFFFFF000) ^ ldr_opcode)
-    {
-      printf("Instruction was not recognized.\n");
-      exit(0x0badc0de);
-    }
-  else
-    {
-      int offset = swi_vector_contents ^ ldr_opcode;
-      uboot_swi = (unsigned int*) (0x10 + offset);
-    }
-
-  // install irq handler
-  if ((irq_vector_contents & 0xFFFFF000) ^ ldr_opcode)
-    {
-      printf("(IRQ) Instruction was not recognized.\n");
-      exit(0x0badc0de);
-    }
-  else
-    {
-      int offset = irq_vector_contents ^ ldr_opcode;
-      uboot_irq = (unsigned int*) (0x20 + offset);
-    }
-
-	uboot_swi_addr = (unsigned int *)(*uboot_swi);
-	uboot_irq_addr = (unsigned int *)(*uboot_irq);
-
-  // new instructions
-  unsigned int new_instruction1 = 0xe51FF004;
-  unsigned int new_instruction2 = (unsigned int) &handleSWI;
-  unsigned int new_instruction3 = (unsigned int) &handleIRQ;
-
-  /* Modify uboot_swi_addr to transfer control, store asm to restore later */
-  old_swi_contents_1 = *uboot_swi_addr;
-  old_swi_contents_2 = *(uboot_swi_addr + 1);
-
-  old_swi_contents_3 = *uboot_irq_addr;
-  old_swi_contents_4 = *(uboot_irq_addr + 1);
-
-  *uboot_swi_addr = new_instruction1;
-  *(uboot_swi_addr + 1) = new_instruction2;
-
-  *uboot_irq_addr = new_instruction1;
-  *(uboot_irq_addr + 1) = new_instruction3;
-
 
 	printf("MAKING USER SWITCH\n");
-	toUSER(argc, argv);
+	int status = toUSER(argc, argv);
 
 	// restore uboot
 	restore_uboot();
 	
-	return 0;
+	return status;
 }
+
+
+
+void install_swi_handler()
+{
+	old_swi_handler = getAddr(SWI_VECTOR_ADDR);
+	
+	/* Save the first two instructions so they may be restored later. */
+	old_swi_inst0 = *(old_swi_handler  );
+	old_swi_inst1 = *(old_swi_handler+1);
+
+	/* Redirect U-Boot's SWI handler to ours. */
+	*(old_swi_handler  ) = LDR_PC_NEXT;
+	*(old_swi_handler+1) = (unsigned long) &handleSWI;
+}
+
+void install_irq_handler()
+{
+	old_irq_handler = getAddr(IRQ_VECTOR_ADDR);
+	
+	/* Save the first two instructions so they may be restored later. */
+	old_irq_inst0 = *(old_irq_handler  );
+	old_irq_inst1 = *(old_irq_handler+1);
+
+	/* Redirect U-Boot's IRQ handler to ours. */
+	*(old_irq_handler  ) = LDR_PC_NEXT;
+	*(old_irq_handler+1) = (unsigned long) &handleIRQ;
+}
+
+
+
+
+
 
 
 // interrupt setup
@@ -134,24 +124,30 @@ void setup_timer(void) {
 	old_oier = reg_read(OSTMR_OIER_ADDR);
 	old_osmr = reg_read(OSTMR_OSMR_ADDR(0));
 
-	systemTime = 0;
-	reg_write(OSTMR_OSCR_ADDR, 0x0);
 	reg_clear(OSTMR_OIER_ADDR, OSTMR_OIER_E1 | OSTMR_OIER_E2 | OSTMR_OIER_E3);
 	reg_write(OSTMR_OIER_ADDR, OSTMR_OIER_E0);
-	reg_write(OSTMR_OSMR_ADDR(0), OSTMR_FREQ/100); 
 
+	
+	reg_write(OSTMR_OSCR_ADDR, 0x0);
+	start_time = reg_read(OSTMR_OSCR_ADDR);
+	reg_write(OSTMR_OSMR_ADDR(0), current_time + (OSTMR_FREQ/100));
+	
+
+//	systemTime = 0;
+//	reg_write(OSTMR_OSCR_ADDR, 0x0);
+//	reg_write(OSTMR_OSMR_ADDR(0), OSTMR_FREQ/100); 
 }
 
 
 // restore uboot
 void restore_uboot(void) {
 	/* Restore the SWI handler */
-	*uboot_swi_addr = old_swi_contents_1;
-    *(uboot_swi_addr + 1) = old_swi_contents_2;
+	*(old_swi_handler  ) = old_swi_inst0;
+    *(old_swi_handler+1) = old_swi_inst1;
 	
 	/* Restore the IRQ handler */
-	*uboot_irq_addr = old_swi_contents_3;
-    *(uboot_irq_addr + 1) = old_swi_contents_4;
+	*(old_irq_handler  ) = old_irq_inst0;
+    *(old_irq_handler+1) = old_irq_inst1;
 	
 	/* Restore ICMR, ICLR, and OIER */
 	reg_write(INT_ICMR_ADDR, old_icmr);
@@ -162,31 +158,57 @@ void restore_uboot(void) {
 
 
 
-/* Exit the kernel */
-void exit(int status)
-{
- *uboot_swi_addr = old_swi_contents_1;
- *(uboot_swi_addr + 1) = old_swi_contents_2; 
 
 
- asm
-	(	
-		"ldr r11, =svc_stack_register \n\t"
-		"ldr sp, [r11] \n\t"
-		"ldmfd sp!, {r1-r12} \n\t"
-		"ldr r11, =svc_link_register \n\t"
-		"ldr lr, [r11] \n\t"
-		"mov pc, lr"	
-	);
 
-}
 
+
+// IRQ interrupt
 void interrupt(void){
-	size_t curTime = reg_read(OSTMR_OSMR_ADDR(0));
+
+	current_time = reg_read(OSTMR_OSCR_ADDR);
+	reg_set(OSTMR_OSSR_ADDR, OSTMR_OSSR_M0);
+	reg_write(OSTMR_OSMR_ADDR(0), current_time + (OSTMR_FREQ/100));
+	
+/*
+	volatile size_t curTime = reg_read(OSTMR_OSCR_ADDR);
 	systemTime += 10;
 	reg_write(OSTMR_OSMR_ADDR(0), curTime + (OSTMR_FREQ/100)); 
-	reg_write(OSTMR_OSSR_ADDR, 0x1);
+	reg_set(OSTMR_OSSR_ADDR, OSTMR_OSSR_M0);
+*/
 }
+
+
+
+// helper function:
+// getAddr returns the address of the handler given the swi vector address
+unsigned long* getAddr(unsigned int vector_addr)
+{
+	unsigned long vector = *(unsigned long *)vector_addr;
+	long offset;
+
+	/* Check if the SWI/IRQ vector addr contains a "ldr pc, [pc, #imm12] instruction. */
+	if ((vector & ~(LDR_U_FLAG | LDR_IMM_MASK)) != LDR_PC_BASE)
+	{
+		printf("Kernel panic: unrecognized vector: %08lx\n", vector);
+		exit_kernel(0x0badc0de);
+	}
+
+	/* Determine the literal offset. */
+	if (vector & LDR_U_FLAG) {
+		offset = vector & LDR_IMM_MASK;
+	}
+	else {
+		offset = -(vector & LDR_IMM_MASK);
+	}
+	
+	/* Find the location of U-Boot's SWI/IRQ handler. */
+	return *(unsigned long **)(vector_addr + PC_OFFSET + offset);
+}
+
+
+
+
 
 /*
  * swi dispatcher takes two parameters: swi number and a pointer to the 
@@ -202,7 +224,7 @@ int my_swi_dispatcher(int swi_number, int* args_ptr)
 	{
 		case EXIT_SWI:
 			// exit takes one parameter: int status
-			exit((int)args_ptr[0]);
+			exit_kernel((int)args_ptr[0]);
 			break;
 			
 		case READ_SWI:
@@ -224,23 +246,34 @@ int my_swi_dispatcher(int swi_number, int* args_ptr)
 			break;
 		
 		default:
-			exit(0x0badc0de);
+			printf("swi dispatcher default \n");
+			exit_kernel(0x0badc0de);
 	}
 	return result;
 }
 
-size_t time(void){
-	return systemTime;
-}
 
-void sleep(size_t duration){
-	// Enable IRQ
+
+//system calls
+
+void sleep(size_t duration)
+{
+	/* Enable IRQ */
 	asm("mrs r12, cpsr");
 	asm("bic r12, r12, #0x80");
 	asm("msr cpsr, r12");
 
-	const size_t endTime = systemTime + duration;
-	while(systemTime < endTime);
+	const size_t endTime = current_time + duration * (OSTMR_FREQ/1000);
+	while (current_time < endTime);
+
+//	const size_t endTime = systemTime + duration * (OSTMR_FREQ/1000);
+//	while(systemTime < endTime);
+}
+
+size_t time()
+{
+	//return systemTime;
+	return (current_time - start_time) / (OSTMR_FREQ/1000);
 }
 
 

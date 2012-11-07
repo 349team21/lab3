@@ -1,11 +1,11 @@
-/home/wwestlin/Desktop/lab3/source/tasks/libc/stdlib/atoi.o:  \
- /home/wwestlin/Desktop/lab3/source/tasks/libc/stdlib/atoi.c \
-  /home/wwestlin/Desktop/lab3/source/tasks/libc/include/stdlib.h \
-  /home/wwestlin/Desktop/lab3/source/tasks/libc/include/ctype.h \
-  /home/wwestlin/Desktop/lab3/source/tasks/libc/include/inline.h
+/afs/ece/usr/yiang/Private/349/source/tasks/libc/stdlib/atoi.o:  \
+ /afs/ece/usr/yiang/Private/349/source/tasks/libc/stdlib/atoi.c \
+  /afs/ece/usr/yiang/Private/349/source/tasks/libc/include/stdlib.h \
+  /afs/ece/usr/yiang/Private/349/source/tasks/libc/include/ctype.h \
+  /afs/ece/usr/yiang/Private/349/source/tasks/libc/include/inline.h
 
-/home/wwestlin/Desktop/lab3/source/tasks/libc/include/stdlib.h:
+/afs/ece/usr/yiang/Private/349/source/tasks/libc/include/stdlib.h:
 
-/home/wwestlin/Desktop/lab3/source/tasks/libc/include/ctype.h:
+/afs/ece/usr/yiang/Private/349/source/tasks/libc/include/ctype.h:
 
-/home/wwestlin/Desktop/lab3/source/tasks/libc/include/inline.h:
+/afs/ece/usr/yiang/Private/349/source/tasks/libc/include/inline.h:

@@ -1,5 +1,5 @@
-/home/wwestlin/Desktop/lab3/source/kernel/start.o:  \
- /home/wwestlin/Desktop/lab3/source/kernel/start.S \
-  /home/wwestlin/Desktop/lab3/source/kernel/include/asm.h
+/afs/ece/usr/yiang/Private/349/source/kernel/start.o:  \
+ /afs/ece/usr/yiang/Private/349/source/kernel/start.S \
+  /afs/ece/usr/yiang/Private/349/source/kernel/include/asm.h
 
-/home/wwestlin/Desktop/lab3/source/kernel/include/asm.h:
+/afs/ece/usr/yiang/Private/349/source/kernel/include/asm.h:
